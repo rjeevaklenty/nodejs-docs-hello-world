@@ -9,6 +9,7 @@ const server = http.createServer((request, response) => {
         response.end('Hello ' + urlParsed.query.name + '\n');
     }
     response.writeHead(200, {"Content-Type": "text/plain"});
+    response.write(process.env.NODE_ENV + '\n')
     response.end("Hello World!");
 });
 
