@@ -2,10 +2,11 @@ const http = require('http');
 var url = require('url');
 
 const server = http.createServer((request, response) => {
-    var queryData = url.parse(request.url, true).query;
-    if (queryData.name) {
-        // user told us their name in the GET request, ex: http://host:8000/?name=Tom
-        response.end('Hello ' + queryData.name + '\n');
+    var urlParsed = url.parse(request.url, true);
+    if (urlParsed.pathname === '/hi') {
+        response.end("Hi World!");   
+    } else if (urlParsed.query.name) {
+        response.end('Hello ' + urlParsed.query.name + '\n');
     }
     response.writeHead(200, {"Content-Type": "text/plain"});
     response.end("Hello World!");
